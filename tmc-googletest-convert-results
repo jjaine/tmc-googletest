@@ -28,7 +28,7 @@ IO.readlines('tmc_available_points.txt').map(&:strip).each do |line|
 end
 
 
-#result = []
+result = []
 
 #document = Nokogiri::XML::Document.parse(File.read('tmc_test_results.xml')) { |config| config.nonet }
 #document.css('testsuite').each do |testsuite|
@@ -39,8 +39,6 @@ end
 #       status: status
 #    }
 #end
-#
-#puts JSON.generate(result)
 
-puts "End of file reached"
+puts JSON.generate(result)
 
