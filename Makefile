@@ -3,7 +3,7 @@ PREFIX=/usr/local
 
 CHECK_CFLAGS=$(shell pkg-config --cflags check)
 CHECK_LDFLAGS=$(shell pkg-config --libs check)
-PKG_CONFIG_FILE=tmccheck.pc
+PKG_CONFIG_FILE=tmcgoogletest.pc
 CONVERTER=tmc-googletest-convert-results
 
 all: rubygems 
