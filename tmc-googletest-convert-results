@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'nokogiri'
+require 'json'
+
+if ARGV.length > 1
+    puts "Usage: #{$0} [path-to-test-result-directory]"
+    exit 1
+elsif ARGV.length == 1
+    Dir.chdir(ARGV[0])
+end
+
+suite_points = {}
+test_points = {}
+
+IO.readlines('tmc_available_points.txt').map(&:strip).each do |line|
+    if line =~ /\[(suite|test)\] \[(.*)\] (.*)/
+        type = $1
+        name = $2
+        points = $3.split(' ')
+        result = if type == 'suite' then suite_points else test_points end
+        result[name] ||= []
+        result[name] += points
+    else
+        puts "Warning: weird line in available points file:"
+        puts line
+    end
+end
+
+
+result = []
+
+document = Nokogiri::XML::Document.parse(File.read('tmc_test_results.xml')) { |config| config.nonet }
+document.css('testsuite').each do |testsuite|
+    suite_name = testsuite['name']
+    status = if testsuite['failures'] == '0' then 'PASSED' else 'FAILED' end
+    result << {
+       methodName: suite_name,
+       status: status
+    }
+end
+
+puts JSON.generate(result)
