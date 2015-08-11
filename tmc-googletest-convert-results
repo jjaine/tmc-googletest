@@ -31,15 +31,13 @@ end
 result = []
 
 document = Nokogiri::XML::Document.parse(File.read('tmc_test_results.xml')) { |config| config.nonet }
-        result << {
-            className: "test",
-            methodName: "test1",
-            message: "This is a test",
-            status: 'FAILED',
-            pointNames: (suite_points[suite_name] || []) + (test_points[test_name] || [])
-        }
-    end
-end
+result << {
+    className: "test",
+    methodName: "test1",
+    message: "This is a test",
+    status: 'FAILED',
+    pointNames: (suite_points[suite_name] || []) + (test_points[test_name] || [])
+}
 
 #document = Nokogiri::XML::Document.parse(File.read('tmc_test_results.xml')) { |config| config.nonet }
 #document.css('testsuite').each do |testsuite|
