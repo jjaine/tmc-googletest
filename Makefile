@@ -1,10 +1,12 @@
 
 PREFIX=/usr/local
 
-PKG_CONFIG_FILE=tmcgoogletest.pc
+CHECK_CFLAGS=$(shell pkg-config --cflags check)
+CHECK_LDFLAGS=$(shell pkg-config --libs check)
+PKG_CONFIG_FILE=tmccheck.pc
 CONVERTER=tmc-googletest-convert-results
 
-all: rubygems
+all: rubygems 
 
 rubygems: .rubygems_installed
 
@@ -13,6 +15,7 @@ rubygems: .rubygems_installed
 	touch .rubygems_installed
 
 clean:
+	rm -f $(PKG_CONFIG_FILE)
 	rm -f .rubygems_installed
 
 $(PKG_CONFIG_FILE): $(PKG_CONFIG_FILE).in
