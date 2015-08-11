@@ -1,0 +1,12 @@
+prefix=__PREFIX__
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: TMC Googletest
+Description: TMC extension to the Googletest unit test framework
+URL: http://github.com/testmycode
+Version: 0.1
+Requires: googletest >= 1.7.0
+Libs: -L${libdir}
+Cflags: -I${includedir} -pthread
