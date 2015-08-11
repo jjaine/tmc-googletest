@@ -33,10 +33,10 @@ result = []
 document = Nokogiri::XML::Document.parse(File.read('tmc_test_results.xml')) { |config| config.nonet }
 result << {
     className: "test",
-    methodName: "test1",
+    methodName: "test_first",
     message: "This is a test",
     status: 'FAILED',
-    pointNames: (suite_points[suite_name] || []) + (test_points[test_name] || [])
+    pointNames: (suite_points["test"] || []) + (test_points["test_first"] || [])
 }
 
 #document = Nokogiri::XML::Document.parse(File.read('tmc_test_results.xml')) { |config| config.nonet }
