@@ -38,7 +38,7 @@ document.css('testsuite').each do |testsuite|
         className: suite_name,
         methodName: "test",
         message: "This is a test",
-        status: 'FAILED',
+        status: status,
         pointNames: (suite_points["test"] || []) + (test_points["test_first"] || [])
     }
 end
