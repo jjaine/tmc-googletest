@@ -33,10 +33,14 @@ result = []
 document = Nokogiri::XML::Document.parse(File.read('tmc_test_results.xml')) { |config| config.nonet }
 document.css('testsuite').each do |testsuite|
     suite_name = testsuite['name']
+
+    testsuite.css('testcase').each do |testcase|
+        test_name = testcase['name']
+    end
     status = if testsuite['failures'] == '0' then 'PASSED' else 'FAILED' end
     result << {
         className: suite_name,
-        methodName: "test",
+        methodName: test_name,
         message: "This is a test",
         status: status,
         pointNames: (suite_points["test"] || []) + (test_points["test_first"] || [])
