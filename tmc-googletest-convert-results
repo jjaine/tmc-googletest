@@ -45,13 +45,15 @@ document.css('testsuite').each do |testsuite|
                 pointNames: (suite_points["test"] || []) + (test_points["test_first"] || [])
             }             
         else
-            result << {
-                className: suite_name,
-                methodName: test_name,
-                message: testcase.css('failure')['message'].text,
-                status: 'FAILED',
-                pointNames: (suite_points["test"] || []) + (test_points["test_first"] || [])
-            }
+            testcase.css('failure') do |failure|
+                result << {
+                    className: suite_name,
+                    methodName: test_name,
+                    message: failure['message'].text,
+                    status: 'FAILED',
+                    pointNames: (suite_points["test"] || []) + (test_points["test_first"] || [])
+                }
+            end
         end
     end
 end
