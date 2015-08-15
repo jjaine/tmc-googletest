@@ -13,6 +13,8 @@ end
 suite_points = {}
 test_points = {}
 
+exec 'make get-points'
+
 IO.readlines('tmc_available_points.txt').map(&:strip).each do |line|
     if line =~ /\[(suite|test)\] \[(.*)\] (.*)/
         type = $1
