@@ -13,7 +13,7 @@ end
 suite_points = {}
 test_points = {}
 
-exec 'make get-points'
+exec 'make && make get-points'
 puts "Generated points file"
 
 IO.readlines('tmc_available_points.txt').map(&:strip).each do |line|
