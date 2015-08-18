@@ -44,7 +44,7 @@ document.css('testsuite').each do |testsuite|
                 methodName: test_name,
                 message: "All ok.",
                 status: 'PASSED',
-                pointNames: (suite_points["test"] || []) + (test_points["test_first"] || [])
+                pointNames: (suite_points["test"] || []) + (test_points[test_name] || [])
             }             
         else
             result << {
@@ -52,29 +52,11 @@ document.css('testsuite').each do |testsuite|
                 methodName: test_name,
                 message: testcase.css('failure')[0]['message'],
                 status: 'FAILED',
-                pointNames: (suite_points["test"] || []) + (test_points["test_first"] || [])
+                pointNames: (suite_points["test"] || []) + (test_points[test_name] || [])
             }
         end
     end
 end
-
-#result << {
-#    className: "test",
-#    methodName: "test_first",
-#    message: "This is a test",
-#    status: 'FAILED',
-#    pointNames: (suite_points["test"] || []) + (test_points["test_first"] || [])
-#}
-
-#document = Nokogiri::XML::Document.parse(File.read('tmc_test_results.xml')) { |config| config.nonet }
-#document.css('testsuite').each do |testsuite|
-#    suite_name = testsuite['name']
-#    status = if testsuite['failures'] == '0' then 'PASSED' else 'FAILED' end
-#    result << {
-#       methodName: suite_name,
-#       status: status
-#    }
-#end
 
 puts JSON.generate(result)
 
