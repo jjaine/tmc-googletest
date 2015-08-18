@@ -49,21 +49,19 @@ document.css('testsuite').each do |testsuite|
         else
             if document.root.at_xpath('failure')
                 msg = testcase.css('failure')[0]['message'] 
-                break
             else
                 msg = "Ok."
             end
+            result << {
+                className: suite_name,
+                methodName: test_name,
+                message: msg,
+                status: 'FAILED',
+                pointNames: (suite_points["test"] || []) + (test_points[test_name] || [])
+            }
         end
-        result << {
-            className: suite_name,
-            methodName: test_name,
-            message: msg,
-            status: 'FAILED',
-            pointNames: (suite_points["test"] || []) + (test_points[test_name] || [])
-        }
     end
 end
-#end
 
 puts JSON.generate(result)
 
