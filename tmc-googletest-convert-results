@@ -47,18 +47,24 @@ document.css('testsuite').each do |testsuite|
                 pointNames: (suite_points["test"] || []) + (test_points[test_name] || [])
             }             
         else
-            if document.root.at_xpath('failure')
-                msg = testcase.css('failure')[0]['message'] 
+            if testcase.at_css('failure')
+                result << {
+                    className: suite_name,
+                    methodName: test_name,
+                    message: testcase.css('failure')[0]['message'],
+                    status: 'FAILED',
+                    pointNames: (suite_points["test"] || []) + (test_points[test_name] || [])
+                }
+
             else
-                msg = "Ok."
+                result << {
+                    className: suite_name,
+                    methodName: test_name,
+                    message: "Ok.",
+                    status: 'PASSED',
+                    pointNames: (suite_points["test"] || []) + (test_points[test_name] || [])
+                }            
             end
-            result << {
-                className: suite_name,
-                methodName: test_name,
-                message: msg,
-                status: 'FAILED',
-                pointNames: (suite_points["test"] || []) + (test_points[test_name] || [])
-            }
         end
     end
 end
