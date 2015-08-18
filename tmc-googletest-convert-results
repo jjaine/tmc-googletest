@@ -13,9 +13,6 @@ end
 suite_points = {}
 test_points = {}
 
-exec 'make && make get-points'
-puts "Generated points file"
-
 IO.readlines('tmc_available_points.txt').map(&:strip).each do |line|
     if line =~ /\[(suite|test)\] \[(.*)\] (.*)/
         type = $1
