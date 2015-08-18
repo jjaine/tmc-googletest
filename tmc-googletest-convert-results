@@ -57,7 +57,7 @@ document.css('testsuite').each do |testsuite|
         result << {
             className: suite_name,
             methodName: test_name,
-            message: testcase.css('failure')[0]['message'],
+            message: msg,
             status: 'FAILED',
             pointNames: (suite_points["test"] || []) + (test_points[test_name] || [])
         }
