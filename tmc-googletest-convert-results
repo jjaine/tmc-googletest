@@ -63,7 +63,7 @@ document.css('testsuite').each do |testsuite|
         }
     end
 end
-end
+#end
 
 puts JSON.generate(result)
 
