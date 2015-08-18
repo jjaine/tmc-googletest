@@ -54,6 +54,7 @@ document.css('testsuite').each do |testsuite|
                 status: 'FAILED',
                 pointNames: (suite_points["test"] || []) + (test_points[test_name] || [])
             }
+            break
         end
     end
 end
